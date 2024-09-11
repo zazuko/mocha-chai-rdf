@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import 'mocha-chai-jest-snapshot'
 import { jestSnapshotPlugin } from 'mocha-chai-jest-snapshot'
 import rdf from '@zazuko/env-node'
 
