@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as url from 'node:url'
 import util from 'node:util'
 import * as chai from 'chai'
@@ -25,7 +26,7 @@ describe('mocha-chai-rdf', () => {
   it('test suites', async () => {
     let output = ''
 
-    Mocha.reporters.Base.consoleLog = (...args: unknown[]) => {
+    ;(Mocha.reporters.Base as any).consoleLog = (...args: unknown[]) => {
       output += util.format(...args) + '\n'
     }
 
@@ -39,7 +40,7 @@ describe('mocha-chai-rdf', () => {
     await new Promise<void>((resolve) => {
       mocha.run(() => {
         // eslint-disable-next-line no-console
-        Mocha.reporters.Base.consoleLog = console.log
+        ;(Mocha.reporters.Base as any).consoleLog = console.log
         resolve()
       })
     })
