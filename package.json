@@ -6,7 +6,8 @@
     "lint": "eslint . --quiet --ext .ts --ignore-path .gitignore",
     "test": "c8 --all --reporter=lcov --reporter=text mocha test/index.test.ts",
     "prepack": "tsc",
-    "prepare": "husky"
+    "prepare": "husky",
+    "release": "changeset publish"
   },
   "exports": {
     "./*.js": "./lib/matchers.js"
