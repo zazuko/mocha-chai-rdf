@@ -29,7 +29,7 @@ let actual: Term | AnyPointer
 expect(actual).to.eq(rdf.ns.schema.Person)
 ```
 
-Additionally, deep equality is also configured.
+Additionally, deep equality is also configured (chai v5+).
 
 ```ts
 import { expect } from 'chai'

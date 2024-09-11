@@ -60,5 +60,13 @@
     "*.{js,ts}": [
       "eslint --fix --quiet"
     ]
+  },
+  "author": "Zazuko GmbH",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zazuko/mocha-chai-rdf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zazuko/mocha-chai-rdf/issues"
   }
 }
