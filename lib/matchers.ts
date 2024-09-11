@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Term } from '@rdfjs/types'
-import { util } from 'chai'
 import type { AnyPointer } from 'clownface'
 import toNT from '@rdfjs/to-ntriples'
 import type deepEqual from 'deep-eql'
@@ -18,7 +17,7 @@ declare global {
   }
 }
 
-const plugin: Chai.ChaiPlugin = (_chai) => {
+const plugin: Chai.ChaiPlugin = (_chai, util) => {
   _chai.config.deepEqual = (expected, actual) => {
     return util.eql(expected, actual, {
       comparator: (obj: unknown, other: Term | unknown) => {

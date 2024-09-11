@@ -1,8 +1,10 @@
-import '../../lib/snapshots.js'
 import rdf from '@zazuko/env-node'
-import { expect } from 'chai'
+import { expect, use } from 'chai'
+import snapshots from '../../lib/snapshots.js'
 
 describe('snapshots.js', () => {
+  use(snapshots)
+
   it('can be used to match canonical representation', () => {
     const dataset = rdf.dataset([
       rdf.quad(rdf.namedNode('http://example.org/'), rdf.namedNode('http://example.org/'), rdf.namedNode('http://example.org/')),

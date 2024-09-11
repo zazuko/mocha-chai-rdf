@@ -49,7 +49,10 @@ expect(value).to.deep.eq([
 
 ```ts
 import type { DatasetCore } from '@rdfjs/types'
-import 'mocha-chai-rdf/snapshots.js'
+import { use } from 'chai'
+import snapshots from 'mocha-chai-rdf/snapshots.js'
+
+use(snapshots)
 
 let dataset: DatasetCore
 expect(dataset).canonical.toMatchSnapshot()
