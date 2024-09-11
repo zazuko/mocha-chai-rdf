@@ -11,7 +11,10 @@
   },
   "license": "MIT",
   "exports": {
-    "./*.js": "./lib/*.js"
+    "./matchers.js": "./lib/matchers.js",
+    "./snapshots.js": "./lib/snapshots.js",
+    "./store.js": "./lib/store.js",
+    "./sparql-clients.js": "./lib/sparql-clients.js"
   },
   "files": [
     "lib/**/*.js",
