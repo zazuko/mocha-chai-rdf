@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import chai, { expect } from 'chai'
+import * as chai from 'chai'
 import { jestSnapshotPlugin } from 'mocha-chai-jest-snapshot'
 import rdf from '@zazuko/env-node'
 
@@ -12,7 +12,10 @@ declare global {
   }
 }
 
-chai.use(jestSnapshotPlugin())
+if (typeof (chai.Assertion.prototype as any).toMatchSnapshot !== 'function') {
+  // calling jestSnapshotPlugin multiple times has unwanted side effects
+  chai.use(jestSnapshotPlugin())
+}
 
 chai.use((_chai, utils) => {
   const toMatchSnapshot = (chai.Assertion.prototype as any).toMatchSnapshot
@@ -22,7 +25,7 @@ chai.use((_chai, utils) => {
 
     if (utils.flag(this, 'dataset-canonical')) {
       // Custom behavior for dataset
-      expect(rdf.dataset.toCanonical(obj)).toMatchSnapshot(...args)
+      chai.expect(rdf.dataset.toCanonical(obj)).toMatchSnapshot(...args)
     } else {
       // Original behavior
       toMatchSnapshot.apply(this, args)

@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mocha-chai-rdf test suites 1`] = `
+"<http://example.org/> <http://example.org/> <http://example.org/> .
+"
+`;
+
+exports[`mocha-chai-rdf test suites 2`] = `"[{\\"@id\\":\\"http://example.org/s\\",\\"http://example.org/p\\":{\\"@id\\":\\"http://example.org/o\\"}}]"`;
+
+exports[`mocha-chai-rdf test suites 3`] = `
+"
+  ✔ store.js createStore before, turtle loads expected triples: 0ms
+  ✔ store.js createStore before, turtle provides access properties: 0ms
+  ✔ store.js createStore beforeEach, turtle loads expected triples: 0ms
+  ✔ store.js createStore beforeEach, trig graph exists loads expected triples: 0ms
+  1) store.js createStore beforeEach, trig graph does not exist throws
+  ✔ store.js createStore beforeEach, trig, all graphs loads expected triples: 0ms
+  ✔ sparql-clients.js parsingClient can be queried with SELECT: 0ms
+  ✔ sparql-clients.js parsingClient can be queried with CONSTRUCT: 0ms
+  ✔ sparql-clients.js parsingClient can be queried with ASK: 0ms
+  ✔ sparql-clients.js parsingClient can be updated: 0ms
+  ✔ sparql-clients.js sparqlClient can be queried with SELECT: 0ms
+  ✔ sparql-clients.js sparqlClient can be queried with CONSTRUCT: 0ms
+  ✔ sparql-clients.js sparqlClient can be queried with ASK: 0ms
+  ✔ sparql-clients.js sparqlClient can be updated: 0ms
+  ✔ snapshots.js can be used to match canonical representation: 0ms
+  ✔ snapshots.js preserves original functionality: 0ms
+  ✔ matchers.js term can compare oxigraph with @rdfjs: 0ms
+  ✔ matchers.js term can compare oxigraph with rdf-data-factory: 0ms
+  ✔ matchers.js term can compare @rdfjs with rdf-data-factory: 0ms
+  ✔ matchers.js term when actual object is pointer succeeds when equal: 0ms
+  2) matchers.js term when actual object is pointer fails when not equal
+  3) matchers.js term when actual object is pointer fails when multi-pointer
+
+  19 passing (0ms)
+  3 failing
+
+  1) store.js
+       createStore
+         beforeEach, trig
+           graph does not exist
+             throws:
+
+      AssertionError [ERR_ASSERTION]: Test data not found in GRAPH <createStore/beforeEach,-trig/graph-does-not-exist>
+      + expected - actual
+
+      -false
+      +true
+      
+      at assertNotEmpty
+      at Context.get
+      at Context.<anonymous>
+      at process.processImmediate
+
+  2) matchers.js
+       term
+         when actual object is pointer
+           fails when not equal:
+
+      AssertionError: expected a pointer to '\\"http://example.org/\\"' but got '<http://example.org/>'
+      + expected - actual
+
+      -<http://example.org/>
+      +\\"http://example.org/\\"
+      
+      at Context.<anonymous>
+      at process.processImmediate
+
+  3) matchers.js
+       term
+         when actual object is pointer
+           fails when multi-pointer:
+     AssertionError: expected a pointer with single term '<http://example.org/>' but got 2 terms
+      at Context.<anonymous>
+      at process.processImmediate
+
+
+
+"
+`;

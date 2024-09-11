@@ -5,41 +5,16 @@ import toStream from 'into-stream'
 import type { ParsingClient } from 'sparql-http-client/ParsingClient.js'
 import type { StreamClient } from 'sparql-http-client/StreamClient.js'
 
-function termToTerm<T extends Term>(term: T): T {
-  // repackage terms using Zazuko's env-node to fix chai assertions
-  switch (term.termType) {
-    case 'NamedNode':
-      return rdf.namedNode(term.value) as T
-    case 'BlankNode':
-      return rdf.blankNode(term.value) as T
-    case 'Literal':
-      return rdf.literal(term.value, term.language || term.datatype) as T
-    case 'Variable':
-      return rdf.variable(term.value) as T
-    case 'Quad':
-      return rdf.quad(
-        termToTerm(term.subject),
-        termToTerm(term.predicate),
-        termToTerm(term.object),
-        termToTerm(term.graph),
-      ) as T
-    case 'DefaultGraph':
-      return rdf.defaultGraph() as T
-    default:
-      throw new Error(`Unsupported term type: ${term}`)
-  }
-}
-
 function select(store: Oxigraph.Store, query: string) {
-  const results: Array<Map<string, Term>> = store.query(query, {
+  const results = store.query(query, {
     use_default_graph_as_union: true,
-  })
+  }) as Array<Map<string, Term>>
 
   return results.map((result) => {
     const bindings: Record<string, Term> = {}
 
     for (const [key, value] of result.entries()) {
-      bindings[key] = termToTerm(value)
+      bindings[key] = value
     }
 
     return bindings
@@ -47,17 +22,17 @@ function select(store: Oxigraph.Store, query: string) {
 }
 
 function construct(store: Oxigraph.Store, query: string) {
-  const results: Array<Quad> = store.query(query, {
+  const results = store.query(query, {
     use_default_graph_as_union: true,
-  })
+  }) as Quad[]
 
-  return rdf.dataset(results.map(termToTerm))
+  return rdf.dataset(results)
 }
 
 async function ask(store: Oxigraph.Store, query: string): Promise<boolean> {
   return store.query(query, {
     use_default_graph_as_union: true,
-  })
+  }) as boolean
 }
 
 async function update(store: Oxigraph.Store, query: string) {
