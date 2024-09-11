@@ -5,5 +5,13 @@
   },
   "env": {
     "mocha": true
-  }
+  },
+  "overrides": [{
+    "files": "test/**/*.ts",
+    "rules": {
+      "import/no-extraneous-dependencies": ["error", {
+        "devDependencies": true
+      }]
+    }
+  }]
 }
