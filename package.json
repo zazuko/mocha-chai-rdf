@@ -9,6 +9,7 @@
     "prepare": "husky",
     "release": "changeset publish"
   },
+  "license": "MIT",
   "exports": {
     "./*.js": "./lib/*.js"
   },
