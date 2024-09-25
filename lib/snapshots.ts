@@ -12,10 +12,11 @@ declare global {
   }
 }
 
-export default function (chai: Chai.ChaiStatic, utils: Chai.ChaiUtils) {
+export default async function (chai: Chai.ChaiStatic, utils: Chai.ChaiUtils) {
   if (typeof (chai.Assertion.prototype as any).toMatchSnapshot !== 'function') {
     // calling jestSnapshotPlugin multiple times has unwanted side effects
-    chai.use(jestSnapshotPlugin())
+    const { use } = await import('chai') // eslint-disable-line import/no-extraneous-dependencies
+    use(jestSnapshotPlugin())
   }
 
   const toMatchSnapshot = (chai.Assertion.prototype as any).toMatchSnapshot
