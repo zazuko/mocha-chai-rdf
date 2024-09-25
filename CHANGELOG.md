@@ -1,5 +1,12 @@
 # mocha-chai-rdf
 
+## 0.1.2
+
+### Patch Changes
+
+- f2ff5c5: Improve docs and package meta
+- e40daf7: Snapshot plugin failed to register with chai v5
+
 ## 0.1.1
 
 ### Patch Changes

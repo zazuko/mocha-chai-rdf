@@ -1,7 +1,7 @@
 {
   "name": "mocha-chai-rdf",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "lint": "eslint . --quiet --ext .ts --ignore-path .gitignore",
     "test": "c8 --all --reporter=lcov --reporter=text mocha test/index.test.ts",
