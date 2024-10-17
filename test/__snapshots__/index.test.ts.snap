@@ -15,6 +15,9 @@ exports[`mocha-chai-rdf test suites 3`] = `
   ✔ store.js createStore beforeEach, trig graph exists loads expected triples: 0ms
   1) store.js createStore beforeEach, trig graph does not exist throws
   ✔ store.js createStore beforeEach, trig, all graphs loads expected triples: 0ms
+  ✔ store.js createEmpty initializes empty dataset: 0ms
+  ✔ store.js createEmpty sparql updates are reflected in dataset: 0ms
+  ✔ store.js createEmpty provides access properties: 0ms
   ✔ sparql-clients.js parsingClient can be queried with SELECT: 0ms
   ✔ sparql-clients.js parsingClient can be queried with CONSTRUCT: 0ms
   ✔ sparql-clients.js parsingClient can be queried with ASK: 0ms
@@ -32,7 +35,7 @@ exports[`mocha-chai-rdf test suites 3`] = `
   2) matchers.js term when actual object is pointer fails when not equal
   3) matchers.js term when actual object is pointer fails when multi-pointer
 
-  19 passing (0ms)
+  22 passing (0ms)
   3 failing
 
   1) store.js

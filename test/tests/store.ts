@@ -65,10 +65,21 @@ describe('store.js', () => {
   })
 
   describe('createEmpty', () => {
-    before(createEmpty)
+    beforeEach(createEmpty)
 
     it('initializes empty dataset', function () {
       expect(this.rdf.dataset).to.have.property('size', 0)
+    })
+
+    it('sparql updates are reflected in dataset', function () {
+      this.rdf.store.update(`
+        PREFIX ex: <http://example.org/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+        INSERT DATA { 
+          GRAPH ex:Foo { ex:foo rdfs:label "Foo" }
+        }`)
+
+      expect(this.rdf.graph.namedNode('http://example.org/foo').out(rdf.ns.rdfs.label).value).to.eq('Foo')
     })
 
     it('provides access properties', function () {

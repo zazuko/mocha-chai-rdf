@@ -42,8 +42,12 @@ export function createEmpty(this: Mocha.Context) {
   const store = new Oxigraph.Store()
 
   const rdfFixture = {
-    dataset: rdf.dataset(),
-    graph: rdf.clownface({ dataset: rdf.dataset() }),
+    get dataset() {
+      return rdf.dataset(store.match())
+    },
+    get graph() {
+      return rdf.clownface({ dataset: this.dataset })
+    },
     store,
     streamClient: clients.streamClient(store),
     parsingClient: clients.parsingClient(store),
@@ -118,8 +122,12 @@ export function createStore(base: string, { sliceTestPath = [1, -1], ...options 
     }
 
     const rdfFixture = {
-      dataset,
-      graph: rdf.clownface({ dataset }),
+      get dataset() {
+        return rdf.dataset(store.match())
+      },
+      get graph() {
+        return rdf.clownface({ dataset: this.dataset })
+      },
       store,
       streamClient: clients.streamClient(store),
       parsingClient: clients.parsingClient(store),
