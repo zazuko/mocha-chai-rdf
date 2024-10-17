@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import rdf from '@zazuko/env-node'
-import { createStore } from '../../lib/store.js'
+import { createEmpty, createStore } from '../../lib/store.js'
 
 describe('store.js', () => {
   describe('createStore', () => {
@@ -61,6 +61,22 @@ describe('store.js', () => {
             'Label from another graph',
           ])
       })
+    })
+  })
+
+  describe('createEmpty', () => {
+    before(createEmpty)
+
+    it('initializes empty dataset', function () {
+      expect(this.rdf.dataset).to.have.property('size', 0)
+    })
+
+    it('provides access properties', function () {
+      expect(this.rdf).to.have.property('graph')
+      expect(this.rdf).to.have.property('dataset')
+      expect(this.rdf).to.have.property('store')
+      expect(this.rdf).to.have.property('streamClient')
+      expect(this.rdf).to.have.property('parsingClient')
     })
   })
 })

@@ -105,3 +105,15 @@ You can customize the options:
 - include the default graph by adding `includeDefaultGraph: true`
 - load all graphs by adding `loadAll: true`
 - control the graph name by adding `sliceTestPath: [number, number]`. The default is `[1, -1]` which, as described above, omits the topmost `describe` block name and the test name itself, hence the first and last part are sliced from the array of block titles.
+
+### Initialise empty store
+
+In case you'd only want to initialise an empty store:
+
+```ts
+import { createEmpty } from 'mocha-chai-rdf/store.js'
+
+describe('my test suite', () => {
+  beforeEach(createEmpty)
+})
+```

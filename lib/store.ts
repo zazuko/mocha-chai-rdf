@@ -4,7 +4,7 @@ import assert from 'node:assert'
 import * as Oxigraph from 'oxigraph'
 import type { NamespaceBuilder } from '@rdfjs/namespace'
 import rdf from '@zazuko/env-node'
-import type { DatasetCore, NamedNode, Quad_Graph } from '@rdfjs/types'
+import type { NamedNode, Quad_Graph } from '@rdfjs/types'
 import type { AnyPointer } from 'clownface'
 import type { Dataset } from '@zazuko/env/lib/Dataset.js'
 import type { StreamClient } from 'sparql-http-client/StreamClient.js'
@@ -14,7 +14,7 @@ import * as clients from './sparql-clients.js'
 declare module 'mocha' {
   interface Context {
     rdf: {
-      dataset: DatasetCore
+      dataset: Dataset
       graph: AnyPointer
       store: Oxigraph.Store
       streamClient: StreamClient
@@ -36,6 +36,31 @@ interface GraphSourceOptions {
 type Options = (DatasetSourceOptions | GraphSourceOptions) & {
   baseIri?: string | NamespaceBuilder
   sliceTestPath?: [number, number]
+}
+
+export function createEmpty(this: Mocha.Context) {
+  const store = new Oxigraph.Store()
+
+  const rdfFixture = {
+    dataset: rdf.dataset(),
+    graph: rdf.clownface({ dataset: rdf.dataset() }),
+    store,
+    streamClient: clients.streamClient(store),
+    parsingClient: clients.parsingClient(store),
+  }
+
+  Object.defineProperty(this, 'rdf', {
+    get() {
+      return rdfFixture
+    },
+    configurable: true,
+  })
+
+  afterEach(() => {
+    /* eslint-disable @typescript-eslint/ban-ts-comment */
+    // @ts-ignore
+    delete this.rdf
+  })
 }
 
 export function createStore(base: string, { sliceTestPath = [1, -1], ...options }: Options = { }) {
