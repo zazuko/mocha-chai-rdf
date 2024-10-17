@@ -1,5 +1,11 @@
 # mocha-chai-rdf
 
+## 0.1.4
+
+### Patch Changes
+
+- 4bebb95: Modifications done to `rdf.store` are now reflected to `rdf.dataset`
+
 ## 0.1.3
 
 ### Patch Changes
