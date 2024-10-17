@@ -1,5 +1,12 @@
 # mocha-chai-rdf
 
+## 0.1.3
+
+### Patch Changes
+
+- 14b8011: Changed the type of `this.rdf.dataset`
+- 14b8011: Added `createEmpty` function to `store.js`
+
 ## 0.1.2
 
 ### Patch Changes
