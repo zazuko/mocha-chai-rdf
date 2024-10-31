@@ -64,5 +64,46 @@ describe('matchers.js', () => {
         expect(pointer).to.be.eq(rdf.namedNode(iri))
       })
     })
+
+    context('when actual and expected objects are pointers', () => {
+      it('succeeds when equal', () => {
+        // given
+        const iri = 'http://example.org/'
+        const actual = rdf.clownface().node(oxigraph.namedNode(iri))
+        const expected = rdf.clownface().node(rdf.namedNode(iri))
+
+        expect(actual).to.be.eq(expected)
+      })
+
+      it('succeeds when equal multi-pointers', () => {
+        // given
+        const iri = 'http://example.org/'
+        const actual = rdf.clownface().node([
+          oxigraph.namedNode(iri + 1),
+          oxigraph.namedNode(iri + 2),
+        ])
+        const expected = rdf.clownface().node([
+          rdf.namedNode(iri + 1),
+          rdf.namedNode(iri + 2),
+        ])
+
+        expect(actual).to.be.eq(expected)
+      })
+
+      it('fails when not equal multi-pointers', () => {
+        // given
+        const iri = 'http://example.org/'
+        const actual = rdf.clownface().node([
+          oxigraph.namedNode(iri + 1),
+          oxigraph.namedNode(iri + 2),
+        ])
+        const expected = rdf.clownface().node([
+          rdf.namedNode(iri + 1),
+          rdf.namedNode(iri + 3),
+        ])
+
+        expect(actual).to.be.eq(expected)
+      })
+    })
   })
 })

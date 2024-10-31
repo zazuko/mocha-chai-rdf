@@ -34,9 +34,12 @@ exports[`mocha-chai-rdf test suites 3`] = `
   ✔ matchers.js term when actual object is pointer succeeds when equal: 0ms
   2) matchers.js term when actual object is pointer fails when not equal
   3) matchers.js term when actual object is pointer fails when multi-pointer
+  ✔ matchers.js term when actual and expected objects are pointers succeeds when equal: 0ms
+  ✔ matchers.js term when actual and expected objects are pointers succeeds when equal multi-pointers: 0ms
+  4) matchers.js term when actual and expected objects are pointers fails when not equal multi-pointers
 
-  22 passing (0ms)
-  3 failing
+  24 passing (0ms)
+  4 failing
 
   1) store.js
        createStore
@@ -60,10 +63,10 @@ exports[`mocha-chai-rdf test suites 3`] = `
          when actual object is pointer
            fails when not equal:
 
-      AssertionError: expected a pointer to '\\"http://example.org/\\"' but got '<http://example.org/>'
+      AssertionError: expected '\\"http://example.org/\\"' but got 'a pointer to <http://example.org/>'
       + expected - actual
 
-      -<http://example.org/>
+      -a pointer to <http://example.org/>
       +\\"http://example.org/\\"
       
       at Context.<anonymous>
@@ -73,7 +76,27 @@ exports[`mocha-chai-rdf test suites 3`] = `
        term
          when actual object is pointer
            fails when multi-pointer:
-     AssertionError: expected a pointer with single term '<http://example.org/>' but got 2 terms
+
+      AssertionError: expected '<http://example.org/>' but got 'a pointer to <http://example.org/1>, …'
+      + expected - actual
+
+      -a pointer to <http://example.org/1>, <http://example.org/2>
+      +<http://example.org/>
+      
+      at Context.<anonymous>
+      at process.processImmediate
+
+  4) matchers.js
+       term
+         when actual and expected objects are pointers
+           fails when not equal multi-pointers:
+
+      AssertionError: expected 'a pointer to <http://example.org/1>, …' but got 'a pointer to <http://example.org/1>, …'
+      + expected - actual
+
+      -a pointer to <http://example.org/1>, <http://example.org/2>
+      +a pointer to <http://example.org/1>, <http://example.org/3>
+      
       at Context.<anonymous>
       at process.processImmediate
 
