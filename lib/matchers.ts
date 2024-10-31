@@ -3,6 +3,7 @@ import type { Term } from '@rdfjs/types'
 import type { AnyPointer } from 'clownface'
 import toNT from '@rdfjs/to-ntriples'
 import type deepEqual from 'deep-eql'
+import env from '@zazuko/env-node'
 
 declare global {
   /* eslint-disable @typescript-eslint/no-namespace */
@@ -34,36 +35,16 @@ const plugin: Chai.ChaiPlugin = (_chai, util) => {
 
   ;['eq', 'equal', 'equals'].forEach((eq) => {
     Assertion.overwriteMethod(eq, function (_super) {
-      return function (this: any, other: Term) {
+      return function (this: any, other: AnyPointer | Term) {
         const obj: AnyPointer | Term | unknown = this._obj
 
-        if (isTermOrPointer(obj)) {
-          if ('terms' in obj) {
-            if (!obj.term) {
-              return this.assert(
-                false,
-                'expected a pointer with single term #{exp} but got #{act} terms',
-                'expected a pointer with single term not to equal #{exp}',
-                toNT(other),
-                obj.terms.length,
-              )
-            }
-
-            return this.assert(
-              other.equals(obj.term),
-              'expected a pointer to #{exp} but got #{act}',
-              'expected a pointer not to equal #{exp}',
-              toNT(other),
-              toNT(obj.term),
-            )
-          }
-
+        if (isTermOrPointer(obj) && isTermOrPointer(other)) {
           return this.assert(
-            other.equals(obj),
-            'expected #{this} to equal #{exp}',
-            'expected #{this} not to equal #{exp}',
-            toNT(other),
-            toNT(obj),
+            setEqual(getTerms(obj), getTerms(other)),
+            'expected #{exp} but got #{act}',
+            'expected #{act} not to equal #{exp}',
+            getDescription(other),
+            getDescription(obj),
           )
         }
 
@@ -75,6 +56,18 @@ const plugin: Chai.ChaiPlugin = (_chai, util) => {
 
 function isTermOrPointer<T extends Term | AnyPointer>(value: T | unknown): value is T {
   return typeof value === 'object' && value !== null && ('termType' in value || 'terms' in value)
+}
+
+function getTerms(obj: AnyPointer | Term) {
+  return env.termSet('terms' in obj ? obj.terms : [obj])
+}
+
+function setEqual<T>(left: Set<T>, right: Set<T>) {
+  return left.size === right.size && [...left].every((term) => right.has(term))
+}
+
+function getDescription(obj: AnyPointer | Term): string {
+  return 'terms' in obj ? `a pointer to ${obj.terms.map(toNT).join(', ')}` : toNT(obj)
 }
 
 export default plugin
