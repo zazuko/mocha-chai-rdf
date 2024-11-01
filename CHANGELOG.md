@@ -1,5 +1,11 @@
 # mocha-chai-rdf
 
+## 0.1.5
+
+### Patch Changes
+
+- 0e552bb: Allow multi-pointers in matchers
+
 ## 0.1.4
 
 ### Patch Changes
