@@ -1,5 +1,11 @@
 # mocha-chai-rdf
 
+## 0.1.6
+
+### Patch Changes
+
+- 7002e4f: Added store functions to in-memory stream client
+
 ## 0.1.5
 
 ### Patch Changes
