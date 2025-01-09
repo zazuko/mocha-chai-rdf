@@ -22,10 +22,15 @@ exports[`mocha-chai-rdf test suites 3`] = `
   ✔ sparql-clients.js parsingClient can be queried with CONSTRUCT: 0ms
   ✔ sparql-clients.js parsingClient can be queried with ASK: 0ms
   ✔ sparql-clients.js parsingClient can be updated: 0ms
-  ✔ sparql-clients.js sparqlClient can be queried with SELECT: 0ms
-  ✔ sparql-clients.js sparqlClient can be queried with CONSTRUCT: 0ms
-  ✔ sparql-clients.js sparqlClient can be queried with ASK: 0ms
-  ✔ sparql-clients.js sparqlClient can be updated: 0ms
+  ✔ sparql-clients.js streamClient query can be queried with SELECT: 0ms
+  ✔ sparql-clients.js streamClient query can be queried with CONSTRUCT: 0ms
+  ✔ sparql-clients.js streamClient query can be queried with ASK: 0ms
+  ✔ sparql-clients.js streamClient query can be updated: 0ms
+  ✔ sparql-clients.js streamClient store get can fetch a select graph: 0ms
+  ✔ sparql-clients.js streamClient store post can add to a named graph: 0ms
+  ✔ sparql-clients.js streamClient store post can add to default graph: 0ms
+  ✔ sparql-clients.js streamClient store put can replace named graph: 0ms
+  ✔ sparql-clients.js streamClient store put can replace default graph data: 0ms
   ✔ snapshots.js can be used to match canonical representation: 0ms
   ✔ snapshots.js preserves original functionality: 0ms
   ✔ matchers.js term can compare oxigraph with @rdfjs: 0ms
@@ -38,7 +43,7 @@ exports[`mocha-chai-rdf test suites 3`] = `
   ✔ matchers.js term when actual and expected objects are pointers succeeds when equal multi-pointers: 0ms
   4) matchers.js term when actual and expected objects are pointers fails when not equal multi-pointers
 
-  24 passing (0ms)
+  29 passing (0ms)
   4 failing
 
   1) store.js

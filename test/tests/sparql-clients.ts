@@ -96,7 +96,7 @@ describe('sparql-clients.js', () => {
     let client: StreamClient
     let store: Store
 
-    before(() => {
+    beforeEach(() => {
       store = new Store()
       store.load(fs.readFileSync(require.resolve('tbbt-ld/dist/tbbt.nq')).toString(), {
         format: 'application/n-quads',
