@@ -1,5 +1,6 @@
+/* eslint-disable camelcase */
 import type * as Oxigraph from 'oxigraph'
-import type { Quad, Term } from '@rdfjs/types'
+import type { NamedNode, Quad, Quad_Graph, Term, DefaultGraph, Stream } from '@rdfjs/types'
 import rdf from '@zazuko/env-node'
 import toStream from 'into-stream'
 import type { ParsingClient } from 'sparql-http-client/ParsingClient.js'
@@ -51,7 +52,7 @@ export function parsingClient(store: Oxigraph.Store): ParsingClient {
       ask: ask.bind(null, store),
       update: update.bind(null, store),
     },
-    store: {} as unknown as ParsingClient['store'],
+    store: undefined,
   }
 }
 
@@ -69,6 +70,22 @@ export function streamClient(store: Oxigraph.Store): StreamClient {
       ask: ask.bind(null, store),
       update: update.bind(null, store),
     },
-    store: {} as unknown as StreamClient['store'],
+    store: {
+      get(graph: Quad_Graph) {
+        return rdf.dataset(store.match(null, null, null, graph)).toStream()
+      },
+      async post(stream: Stream, { graph: to_graph_name }: { graph?: NamedNode | DefaultGraph } = {}) {
+        const data = await rdf.dataset().import(stream)
+        store.load(data.toCanonical(), { to_graph_name, format: 'nt' })
+      },
+      async put(stream: Stream, options?: { graph?: NamedNode | DefaultGraph }) {
+        if (options?.graph?.termType === 'NamedNode') {
+          store.update(`CLEAR SILENT GRAPH <${options?.graph?.value}>`)
+        } else {
+          store.update('CLEAR DEFAULT')
+        }
+        await this.post(stream, options)
+      },
+    },
   }
 }
