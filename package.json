@@ -26,7 +26,7 @@
     "@zazuko/env-node": "^2.1.4",
     "into-stream": "^8.0.1",
     "mocha-chai-jest-snapshot": "^1.1.6",
-    "oxigraph": "^0.4.0-alpha.8",
+    "oxigraph": "^0.4.9",
     "stream-to-string": "^1.2.1"
   },
   "devDependencies": {

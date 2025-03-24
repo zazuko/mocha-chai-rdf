@@ -32,8 +32,25 @@ describe('store.js', () => {
       })
     })
 
-    describe('beforeEach, with includes', () => {
+    describe('beforeEach, ttl, with includes', () => {
       beforeEach(createStore(import.meta.url, {
+        include: [
+          'fixture/foo.ttl',
+          'fixture/bar.trig',
+        ],
+      }))
+
+      it('loads expected triples', function () {
+        expect(this.rdf.dataset.match(ex.foo, rdf.ns.rdf.type, ex.Foo, rdf.defaultGraph())).to.have.property('size', 1)
+        expect(this.rdf.dataset.match(ex.bar, rdf.ns.rdf.type, ex.Bar, ex.bar)).to.have.property('size', 1)
+      })
+    })
+
+    describe('beforeEach, trig, with includes', () => {
+      beforeEach(createStore(import.meta.url, {
+        format: 'trig',
+        loadAll: true,
+        baseIri: 'https://example.com/',
         include: [
           'fixture/foo.ttl',
           'fixture/bar.trig',
