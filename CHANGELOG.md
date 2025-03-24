@@ -1,5 +1,11 @@
 # mocha-chai-rdf
 
+## 0.1.8
+
+### Patch Changes
+
+- 4b30c1b: `include` option did not work when loading a single graph from trig
+
 ## 0.1.7
 
 ### Patch Changes
