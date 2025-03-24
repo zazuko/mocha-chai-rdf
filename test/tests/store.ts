@@ -2,6 +2,8 @@ import { expect } from 'chai'
 import rdf from '@zazuko/env-node'
 import { createEmpty, createStore } from '../../lib/store.js'
 
+const ex = rdf.namespace('http://example.org/')
+
 describe('store.js', () => {
   describe('createStore', () => {
     describe('before, turtle', () => {
@@ -27,6 +29,20 @@ describe('store.js', () => {
       it('loads expected triples', function () {
         expect(this.rdf.dataset).to.have.property('size', 1)
         expect(this.rdf.graph.has(rdf.ns.rdfs.label).out(rdf.ns.rdfs.label).value).to.eq('Turtle used in before')
+      })
+    })
+
+    describe('beforeEach, with includes', () => {
+      beforeEach(createStore(import.meta.url, {
+        include: [
+          'fixture/foo.ttl',
+          'fixture/bar.trig',
+        ],
+      }))
+
+      it('loads expected triples', function () {
+        expect(this.rdf.dataset.match(ex.foo, rdf.ns.rdf.type, ex.Foo, rdf.defaultGraph())).to.have.property('size', 1)
+        expect(this.rdf.dataset.match(ex.bar, rdf.ns.rdf.type, ex.Bar, ex.bar)).to.have.property('size', 1)
       })
     })
 
