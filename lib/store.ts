@@ -89,6 +89,11 @@ export function createStore(base: string, { sliceTestPath = [1, -1], include = [
       baseIRI,
     }))
 
+    await Promise.all((include).map(async (file) => {
+      const path = url.fileURLToPath(new url.URL(file, base))
+      return dataset.import(rdf.fromFile(path, { baseIRI }))
+    }))
+
     let graph: Quad_Graph | undefined
     if (this.currentTest && !loadAll) {
       graph = testGraph(this.currentTest, sliceTestPath)
