@@ -4,7 +4,7 @@ import assert from 'node:assert'
 import * as Oxigraph from 'oxigraph'
 import type { NamespaceBuilder } from '@rdfjs/namespace'
 import rdf from '@zazuko/env-node'
-import type { NamedNode, Quad_Graph } from '@rdfjs/types'
+import type { NamedNode, Quad_Graph, DatasetCore } from '@rdfjs/types'
 import type { AnyPointer } from 'clownface'
 import type { Dataset } from '@zazuko/env/lib/DatasetExt.js'
 import type { StreamClient } from 'sparql-http-client/StreamClient.js'
@@ -89,11 +89,6 @@ export function createStore(base: string, { sliceTestPath = [1, -1], include = [
       baseIRI,
     }))
 
-    await Promise.all((include).map(async (file) => {
-      const path = url.fileURLToPath(new url.URL(file, base))
-      return dataset.import(rdf.fromFile(path, { baseIRI }))
-    }))
-
     let graph: Quad_Graph | undefined
     if (this.currentTest && !loadAll) {
       graph = testGraph(this.currentTest, sliceTestPath)
@@ -105,6 +100,11 @@ export function createStore(base: string, { sliceTestPath = [1, -1], include = [
           return rdf.quad(quad.subject, quad.predicate, quad.object)
         }) as Dataset
     }
+
+    await Promise.all((include).map(async (file) => {
+      const path = url.fileURLToPath(new url.URL(file, base))
+      await rdf.dataset.import(store as unknown as DatasetCore, rdf.fromFile(path, { baseIRI }))
+    }))
 
     for (const quad of dataset) {
       store.add(quad)
