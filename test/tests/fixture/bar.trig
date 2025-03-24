@@ -1,0 +1,5 @@
+PREFIX ex: <http://example.org/>
+
+ex:bar {
+  ex:bar a ex:Bar .
+}

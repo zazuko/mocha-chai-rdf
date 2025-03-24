@@ -6,7 +6,7 @@ import type { NamespaceBuilder } from '@rdfjs/namespace'
 import rdf from '@zazuko/env-node'
 import type { NamedNode, Quad_Graph } from '@rdfjs/types'
 import type { AnyPointer } from 'clownface'
-import type { Dataset } from '@zazuko/env/lib/Dataset.js'
+import type { Dataset } from '@zazuko/env/lib/DatasetExt.js'
 import type { StreamClient } from 'sparql-http-client/StreamClient.js'
 import type { ParsingClient } from 'sparql-http-client/ParsingClient.js'
 import * as clients from './sparql-clients.js'
@@ -36,6 +36,7 @@ interface GraphSourceOptions {
 type Options = (DatasetSourceOptions | GraphSourceOptions) & {
   baseIri?: string | NamespaceBuilder
   sliceTestPath?: [number, number]
+  include?: string[]
 }
 
 export function createEmpty(this: Mocha.Context) {
@@ -67,7 +68,7 @@ export function createEmpty(this: Mocha.Context) {
   })
 }
 
-export function createStore(base: string, { sliceTestPath = [1, -1], ...options }: Options = { }) {
+export function createStore(base: string, { sliceTestPath = [1, -1], include = [], ...options }: Options = { }) {
   const baseIRI: string | undefined = typeof options.baseIri === 'string'
     ? options.baseIri
     : options.baseIri?.().value
@@ -84,8 +85,13 @@ export function createStore(base: string, { sliceTestPath = [1, -1], ...options 
 
     const path = url.fileURLToPath(new url.URL(`${base}.${format}`))
 
-    let dataset: Dataset = await rdf.dataset().import(rdf.fromFile(path, {
+    let dataset = await rdf.dataset().import(rdf.fromFile(path, {
       baseIRI,
+    }))
+
+    await Promise.all((include).map(async (file) => {
+      const path = url.fileURLToPath(new url.URL(file, base))
+      return dataset.import(rdf.fromFile(path, { baseIRI }))
     }))
 
     let graph: Quad_Graph | undefined
@@ -97,7 +103,7 @@ export function createStore(base: string, { sliceTestPath = [1, -1], ...options 
         })
         .map(function toDefaultGraph(quad) {
           return rdf.quad(quad.subject, quad.predicate, quad.object)
-        })
+        }) as Dataset
     }
 
     for (const quad of dataset) {
