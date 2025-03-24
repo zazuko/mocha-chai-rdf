@@ -1,5 +1,11 @@
 # mocha-chai-rdf
 
+## 0.1.7
+
+### Patch Changes
+
+- 3ba2524: `createStore`: Add an option to include arbitrary graphs
+
 ## 0.1.6
 
 ### Patch Changes
