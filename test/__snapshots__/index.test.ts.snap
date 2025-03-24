@@ -12,6 +12,7 @@ exports[`mocha-chai-rdf test suites 3`] = `
   ✔ store.js createStore before, turtle loads expected triples: 0ms
   ✔ store.js createStore before, turtle provides access properties: 0ms
   ✔ store.js createStore beforeEach, turtle loads expected triples: 0ms
+  ✔ store.js createStore beforeEach, with includes loads expected triples: 0ms
   ✔ store.js createStore beforeEach, trig graph exists loads expected triples: 0ms
   1) store.js createStore beforeEach, trig graph does not exist throws
   ✔ store.js createStore beforeEach, trig, all graphs loads expected triples: 0ms
@@ -43,7 +44,7 @@ exports[`mocha-chai-rdf test suites 3`] = `
   ✔ matchers.js term when actual and expected objects are pointers succeeds when equal multi-pointers: 0ms
   4) matchers.js term when actual and expected objects are pointers fails when not equal multi-pointers
 
-  29 passing (0ms)
+  30 passing (0ms)
   4 failing
 
   1) store.js
