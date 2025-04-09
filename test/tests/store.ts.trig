@@ -6,6 +6,12 @@ GRAPH <createStore/beforeEach,-trig/graph-exists> {
   ] .
 }
 
+GRAPH <createStore/beforeEach,-trig/graph:needs:escaping> {
+  [
+    rdfs:label "I'm here" ;
+  ] .
+}
+
 GRAPH <another-graph> {
   [
     rdfs:label "Label from another graph" ;

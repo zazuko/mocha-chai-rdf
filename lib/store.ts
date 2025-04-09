@@ -99,7 +99,8 @@ export function createStore(base: string, { sliceTestPath = [1, -1], include = [
       graph = testGraph(this.currentTest, sliceTestPath)
       dataset = dataset
         .filter((quad) => {
-          return quad.graph.equals(graph) || (includeDefaultGraph && quad.graph.equals(rdf.defaultGraph()))
+          return (graph && decodeURIComponent(quad.graph.value) === decodeURIComponent(graph.value)) ||
+            (includeDefaultGraph && quad.graph.equals(rdf.defaultGraph()))
         })
         .map(function toDefaultGraph(quad) {
           return rdf.quad(quad.subject, quad.predicate, quad.object)
