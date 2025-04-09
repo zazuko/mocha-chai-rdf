@@ -1,5 +1,11 @@
 # mocha-chai-rdf
 
+## 0.1.9
+
+### Patch Changes
+
+- 1157dca: Improve handling of tests which include characters escaped in URIs
+
 ## 0.1.8
 
 ### Patch Changes
