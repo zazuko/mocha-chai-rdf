@@ -73,6 +73,13 @@ describe('store.js', () => {
         })
       })
 
+      context('graph:needs:escaping', () => {
+        it('loads expected triples', function () {
+          expect(this.rdf.dataset).to.have.property('size', 1)
+          expect(this.rdf.graph.has(rdf.ns.rdfs.label).out(rdf.ns.rdfs.label).value).to.eq("I'm here")
+        })
+      })
+
       context('graph does not exist', () => {
         it('throws', function () {
           expect(this.rdf.dataset).to.have.property('size').gt(0)
