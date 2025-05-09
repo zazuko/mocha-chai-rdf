@@ -3,7 +3,7 @@ import type { Term } from '@rdfjs/types'
 import type { AnyPointer } from 'clownface'
 import toNT from '@rdfjs/to-ntriples'
 import type deepEqual from 'deep-eql'
-import env from '@zazuko/env-node'
+import env from '@zazuko/env/web.js'
 
 declare global {
   /* eslint-disable @typescript-eslint/no-namespace */
