@@ -1,5 +1,11 @@
 # mocha-chai-rdf
 
+## 0.1.10
+
+### Patch Changes
+
+- 8fe7a5f: fix: module `matchers.js` was not usable with `@web/test-runner` because it indirectly imported `stream`
+
 ## 0.1.9
 
 ### Patch Changes
