@@ -1,5 +1,11 @@
 # mocha-chai-rdf
 
+## 0.1.11
+
+### Patch Changes
+
+- bb940bf: Use interfaces instead of classes for client types
+
 ## 0.1.10
 
 ### Patch Changes
