@@ -26,12 +26,12 @@
     "@zazuko/env": "^3.0.0",
     "@zazuko/env-node": "^3.0.0",
     "into-stream": "^8.0.1",
-    "mocha-chai-jest-snapshot": "^1.1.6",
+    "mocha-chai-jest-snapshot": "^1.1.7",
     "oxigraph": "^0.4.9",
     "stream-to-string": "^1.2.1"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.8",
+    "@changesets/cli": "^2.29.8",
     "@tpluscode/eslint-config": "^0.5.0",
     "@types/chai": "^5",
     "@types/deep-eql": "^4.0.2",
