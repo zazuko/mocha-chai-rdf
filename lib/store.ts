@@ -7,8 +7,7 @@ import rdf from '@zazuko/env-node'
 import type { NamedNode, Quad_Graph, DatasetCore } from '@rdfjs/types'
 import type { AnyPointer } from 'clownface'
 import type { Dataset } from '@zazuko/env/lib/DatasetExt.js'
-import type { StreamClient } from 'sparql-http-client/StreamClient.js'
-import type { ParsingClient } from 'sparql-http-client/ParsingClient.js'
+import type { StreamClient, ParsingClient } from 'sparql-http-client'
 import * as clients from './sparql-clients.js'
 
 declare module 'mocha' {
