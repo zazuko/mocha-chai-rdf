@@ -112,7 +112,7 @@ export function createStore(base: string, { sliceTestPath = [1, -1], include = [
     }))
 
     for (const quad of dataset) {
-      store.add(quad)
+      store.add(quad as unknown as Oxigraph.Quad)
     }
 
     function assertNotEmpty() {

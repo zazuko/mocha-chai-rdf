@@ -15,6 +15,19 @@ jobs:
       - run: npm ci
       - run: npm run lint
 
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 20, 'lts/*']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npx tsc
+
   test:
     runs-on: ubuntu-latest
     strategy:
