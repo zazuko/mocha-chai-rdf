@@ -1,5 +1,11 @@
 # mocha-chai-rdf
 
+## 0.2.0
+
+### Minor Changes
+
+- 3dacdf8: Updated oxigraph to `0.5.6`. Drops support for node 18.
+
 ## 0.1.11
 
 ### Patch Changes
